@@ -30,7 +30,7 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final TokenProvider tokenProvider;
 
-    public TokenResponse kakaoLogin(String accessToken, String tokenId) {
+    public TokenResponse kakaoLogin(String accessToken) {
         KakaoOAuth2UserInfo profile = getUserInfoByToken(accessToken);
 
         UserEntity user = userRepository.findByEmail(profile.getEmail())

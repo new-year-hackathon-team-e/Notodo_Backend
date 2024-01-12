@@ -35,10 +35,4 @@ public class UserService {
                 .build();
     }
 
-    public int updateReminderDay(String email, int reminderDay) {
-        UserEntity user = findUserByEmail(email);
-        user.updateReminderDay(reminderDay);
-        userRepository.save(user);
-        return reminderDay;
-    }
 }

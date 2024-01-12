@@ -20,8 +20,8 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("kakaologin")
-    public NotTodoApiResponse<TokenResponse> kakaoLogin(String accessToken, String tokenId) {
-        TokenResponse response = authService.kakaoLogin(accessToken, tokenId);
+    public NotTodoApiResponse<TokenResponse> kakaoLogin(String accessToken) {
+        TokenResponse response = authService.kakaoLogin(accessToken );
         return NotTodoApiResponse.createResponse(response, UserMessage.LOGIN_SUCCESS);
     }
 

@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Entity
 @NoArgsConstructor
-public class UserEntity extends BaseTimeEntity {
+public class UserEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +24,6 @@ public class UserEntity extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ColumnDefault("1")
-    private int reminderDay;
 
     @Builder
     public UserEntity(String email,
@@ -47,7 +44,4 @@ public class UserEntity extends BaseTimeEntity {
         this.nickname = nickname;
     }
 
-    public void updateReminderDay(int reminderDay) {
-        this.reminderDay = reminderDay;
-    }
 }

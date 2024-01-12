@@ -28,10 +28,5 @@ public class UserController {
         return NotTodoApiResponse.createResponse(response, UserMessage.USER_INFO_GET_SUCCESS);
     }
 
-    @PostMapping("/user/reminderday")
-    public NotTodoApiResponse<Integer> updateReminderDay(@AuthenticationPrincipal UserInfo user,
-                                                @RequestBody int reminderDay) {
-        int response = userService.updateReminderDay(user.getEmail(), reminderDay);
-        return NotTodoApiResponse.createResponse(response, UserMessage.REMINDER_DAY_UPDATE_SUCCESS);
-    }
+
 }
