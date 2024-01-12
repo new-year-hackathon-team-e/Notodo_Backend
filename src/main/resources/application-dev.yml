@@ -14,3 +14,6 @@ spring:
     password: Notodo0112
     username: mariadb
     url: jdbc:mariadb://eazy-pn.jsangmin.co.kr:3301/public
+
+jwt:
+  secret: 'ipXEnzGogFF7yGtY2HxXG8BXNyG6vHD4abet+ROcYOMmEaaSRz96in6fX8SpqmFl5Yt5gTWila+h2Y/ZKDLz0Q=='

@@ -1,4 +1,4 @@
-package com.example.notodo_backend.config;
+package com.example.notodo_backend.global.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.OAS_30)
                 .useDefaultResponseMessages(true)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(" com.notodo.backend.config"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.notodo_backend"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
