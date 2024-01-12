@@ -1,6 +1,6 @@
 package com.example.notodo_backend.global.jwt;
 
-import com.example.notodo_backend.global.dto.NotTodoApiResponse;
+import com.example.notodo_backend.global.dto.NoTodoApiResponse;
 import com.example.notodo_backend.global.message.DefaultMessage;
 import com.example.notodo_backend.global.message.ResponseMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +21,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
         // 403에러
         ResponseMessage errorMessage = DefaultMessage.FORBIDDEN;
-        NotTodoApiResponse notTodoApiResponse = NotTodoApiResponse.createResponse(null, errorMessage);
+        NoTodoApiResponse notTodoApiResponse = NoTodoApiResponse.createResponse(null, errorMessage);
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(errorMessage.getStatus().value());

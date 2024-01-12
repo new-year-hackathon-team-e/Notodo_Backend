@@ -1,6 +1,6 @@
 package com.example.notodo_backend.global.exception;
 
-import com.example.notodo_backend.global.dto.NotTodoApiResponse;
+import com.example.notodo_backend.global.dto.NoTodoApiResponse;
 import com.example.notodo_backend.global.message.DefaultMessage;
 import com.example.notodo_backend.global.message.ResponseMessage;
 import org.springframework.http.HttpHeaders;
@@ -64,7 +64,7 @@ public class ControllerAdviceExceptionHandler extends ResponseEntityExceptionHan
     }
 
     private ResponseEntity<Object> makeErrorResponse(ResponseMessage errorMessage) {
-        NotTodoApiResponse<?> errorResponse = NotTodoApiResponse.createResponse(null, errorMessage);
+        NoTodoApiResponse<?> errorResponse = NoTodoApiResponse.createResponse(null, errorMessage);
         return ResponseEntity.status(errorMessage.getStatus()).body(errorResponse);
     }
 }

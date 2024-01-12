@@ -1,58 +1,46 @@
 package com.example.notodo_backend.domain.mytodo.service;
 
-import com.example.notodo_backend.domain.mytodo.dto.NotodoResponseDto;
+import com.example.notodo_backend.domain.mytodo.dto.CreateNotodoResponseDto;
 import com.example.notodo_backend.domain.mytodo.dto.NotodoRequestDto;
 import com.example.notodo_backend.domain.mytodo.entity.NotodoEntity;
-import java.util.List;
+import com.example.notodo_backend.domain.mytodo.repository.NotodoRepository;
+import com.example.notodo_backend.domain.user.entity.UserEntity;
+import com.example.notodo_backend.domain.user.repository.UserRepository;
+import com.example.notodo_backend.global.exception.ApiException;
+import com.example.notodo_backend.global.message.NoTodoMessage;
+import com.example.notodo_backend.global.message.UserMessage;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-//메서드 선언만
-public interface NotodoService {
-    NotodoRequestDto addNotodo(Long categoryId, NotodoRequestDto notodoRequestDto);
-    void deleteNotodo(Long id);
-    List<NotodoResponseDto> findAll(Long id);
-    NotodoResponseDto findById(Long id);
-    void update(Long id, NotodoRequestDto updateParam);
-    boolean existsId(Long categoryId);
 
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class NotodoService {
 
-    // request
-    // dto --> Entity 로 변환
-    default NotodoEntity reqToEntity(NotodoRequestDto notodoRequestDto) {
-        NotodoEntity notodoEntity = NotodoEntity.builder()
-                .contents(notodoRequestDto.getContents())
-                .complete_chk(notodoRequestDto.getComplete_chk())
-                .build();
-        return notodoEntity;
-    }
+    private final UserRepository userRepository;
+    private final NotodoRepository notodoRepository;
 
-    // Entity --> dto 로 변환
-    default NotodoRequestDto reqToDto(NotodoEntity notodoEntity) {
-        NotodoRequestDto notodoRequestDto = NotodoRequestDto.builder()
-                .contents(notodoEntity.getContents())
-                .complete_chk(notodoEntity.getComplete_chk())
-                .build();
-        return notodoRequestDto;
+    @Transactional
+    public CreateNotodoResponseDto createTodo(String content, Boolean checkBox, String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(() -> new ApiException(UserMessage.USER_NOT_FOUND));
+        NotodoEntity noTodoEntity = new NotodoEntity(content, checkBox , userEntity);
+        noTodoEntity = notodoRepository.save(noTodoEntity);
+        return new CreateNotodoResponseDto(noTodoEntity);
     }
 
 
-    // response
-    // dto --> Entity 로 변환
-    default NotodoEntity resToEntity(NotodoResponseDto notodoResponseDto) {
-        NotodoEntity notodoEntity = NotodoEntity.builder()
-                .contents(notodoResponseDto.getContents())
-                .complete_chk(notodoResponseDto.getComplete_chk())
-                .build();
-        return notodoEntity;
-    }
 
-    // Entity --> dto 로 변환
-    default NotodoResponseDto resToDto(NotodoEntity notodoEntity) {
-        NotodoResponseDto notodoResponseDto = NotodoResponseDto.builder()
-                .id(notodoEntity.getId())
-                .contents(notodoEntity.getContents())
-                .complete_chk(notodoEntity.getComplete_chk())
-                .categoryTitle(notodoEntity.getCategory().getTitle())
-                .build();
-        return notodoResponseDto;
+
+    @Transactional
+    public CreateNotodoResponseDto updateTodo(NotodoRequestDto notodoRequestDto, String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(() -> new ApiException(UserMessage.USER_NOT_FOUND));
+        NotodoEntity noTodoEntity = notodoRepository.findById(notodoRequestDto.getId()).orElseThrow(() -> new ApiException(NoTodoMessage.TODO_NOT_FOUND));
+        NotodoEntity noTodoEntity2 = new NotodoEntity(notodoRequestDto);
+        noTodoEntity2 = notodoRepository.save(noTodoEntity2);
+        return new CreateNotodoResponseDto(noTodoEntity2);
+
     }
 }

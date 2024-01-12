@@ -1,6 +1,6 @@
 package com.example.notodo_backend.domain.user.controller;
 
-import com.example.notodo_backend.global.dto.NotTodoApiResponse;
+import com.example.notodo_backend.global.dto.NoTodoApiResponse;
 import com.example.notodo_backend.global.jwt.oauth.UserInfo;
 import com.example.notodo_backend.global.message.UserMessage;
 import com.example.notodo_backend.domain.user.dto.AuthorDto;
@@ -17,15 +17,15 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/user")
-    public NotTodoApiResponse<?> updateNickName(@AuthenticationPrincipal UserInfo user,
-                                            @RequestBody NicknameRequest nicknameRequest) {
+    public NoTodoApiResponse<?> updateNickName(@AuthenticationPrincipal UserInfo user,
+                                               @RequestBody NicknameRequest nicknameRequest) {
         userService.updateNickname(user.getEmail(), nicknameRequest.nickname());
-        return NotTodoApiResponse.createResponse(null, UserMessage.NICKNAME_UPDATE_SUCCESS);
+        return NoTodoApiResponse.createResponse(null, UserMessage.NICKNAME_UPDATE_SUCCESS);
     }
     @GetMapping("/user/me")
-    public NotTodoApiResponse<AuthorDto> getUserInfo(@AuthenticationPrincipal UserInfo user) {
+    public NoTodoApiResponse<AuthorDto> getUserInfo(@AuthenticationPrincipal UserInfo user) {
         AuthorDto response = userService.getUserInfo(user.getEmail());
-        return NotTodoApiResponse.createResponse(response, UserMessage.USER_INFO_GET_SUCCESS);
+        return NoTodoApiResponse.createResponse(response, UserMessage.USER_INFO_GET_SUCCESS);
     }
 
 

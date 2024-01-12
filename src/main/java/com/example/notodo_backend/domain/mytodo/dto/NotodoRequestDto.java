@@ -1,2 +1,11 @@
-package com.example.notodo_backend.domain.mytodo.dto;public class NotodoRequestDto {
+package com.example.notodo_backend.domain.mytodo.dto;
+
+import lombok.Getter;
+
+@Getter
+public class NotodoRequestDto {
+
+    private Long id;
+    private String content;
+    private Boolean checkBox;
 }

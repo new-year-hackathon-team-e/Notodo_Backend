@@ -6,12 +6,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class NotTodoApiResponse<T> {
+public class NoTodoApiResponse<T> {
     T data;
     String message;
     String code;
 
-    public static <G> NotTodoApiResponse<G> createResponse(G data, ResponseMessage responseMessage) {
-        return new NotTodoApiResponse<>(data, responseMessage.getMessage(), responseMessage.toString());
+    public static <G> NoTodoApiResponse<G> createResponse(G data, ResponseMessage responseMessage) {
+        return new NoTodoApiResponse<>(data, responseMessage.getMessage(), responseMessage.toString());
     }
 }
