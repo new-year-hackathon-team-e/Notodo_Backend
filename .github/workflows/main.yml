@@ -1,7 +1,7 @@
 name: Java CI with Gradle
 on:
   push:
-    branches: [ "feature/configSetting", "develop"]
+    branches: [ "main", "develop"]
 permissions:
   contents: read
 jobs:
