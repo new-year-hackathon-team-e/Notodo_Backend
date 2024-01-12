@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: 'true'
+        dialect: org.hibernate.dialect.MariaDBDialect
+    show-sql: 'true'
+    open-in-view: 'false'
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: Notodo0112
+    username: mariadb
+    url: jdbc:mariadb://eazy-pn.jsangmin.co.kr:3301/public
