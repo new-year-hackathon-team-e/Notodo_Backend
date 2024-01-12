@@ -1,38 +1,34 @@
 package com.example.notodo_backend.global.config;
 
-
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
+import org.springframework.http.HttpHeaders;
 
-
+@RequiredArgsConstructor
 @Configuration
-@EnableWebMvc
 public class SwaggerConfig {
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
-                .useDefaultResponseMessages(true)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.notodo_backend"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
+    public OpenAPI customOpenAPI() {
 
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("notodo swagger")
-                .description("NoTodo API Document")
-                .version("1.0")
-                .build();
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Notodo 프로젝트 API")
+                        .description("Notodo 백엔드 API 명세서")
+                        .version("v1"))
+                .addSecurityItem(new SecurityRequirement().addList("JWT"))
+                .components(new Components()
+                        .addSecuritySchemes("JWT", new SecurityScheme()
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                                .in(SecurityScheme.In.HEADER)
+                                .name(HttpHeaders.AUTHORIZATION)));
     }
 
 }
