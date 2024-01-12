@@ -2,7 +2,7 @@ package com.example.notodo_backend.global.jwt;
 
 import com.example.notodo_backend.global.jwt.dto.TokenResponse;
 import com.example.notodo_backend.global.jwt.oauth.UserInfo;
-import com.example.notodo_backend.user.entity.RoleType;
+import com.example.notodo_backend.domain.user.entity.RoleType;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
