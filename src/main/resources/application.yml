@@ -1,3 +1,4 @@
+
 spring:
   mvc:
     pathmatch:
@@ -11,5 +12,6 @@ spring:
 
   profiles:
     include: dev
-
+server:
+  port: 8085
 
